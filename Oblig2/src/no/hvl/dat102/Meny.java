@@ -15,8 +15,9 @@ public class Meny {
 	public void start()  {
 		
 		Scanner leser = new Scanner(System.in);
-		System.out.println("Hva ønsker du å gjøre? Skriv følgende for ønskede funksjoner:\n");
 		int svar = 1;
+		System.out.println("Hva ønsker du å gjøre? Skriv følgende for ønskede funksjoner:\n");
+		
 		
 		while(true) {
 			System.out.println("Avslutt: 1");

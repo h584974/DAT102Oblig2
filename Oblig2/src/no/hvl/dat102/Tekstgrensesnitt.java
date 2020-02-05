@@ -14,7 +14,6 @@ public class Tekstgrensesnitt {
 	}
 	
 	public static void skrivUtStatistikk(FilmarkivADT filmarkiv) {
-		
 		int antall = filmarkiv.getAntall();
 		int antallFANTASI = filmarkiv.antallSjanger(Sjanger.FANTASI);
 		int antallSCIFI = filmarkiv.antallSjanger(Sjanger.SCIFI);
@@ -26,11 +25,9 @@ public class Tekstgrensesnitt {
 		System.out.println(String.format("%20s", "Antall SCIFI:") + "   " + String.format("%5d", antallSCIFI));
 		System.out.println(String.format("%20s", "Antall DOKUMENTAR:") + "   " + String.format("%5d", antallDOKUMENTAR));
 		System.out.println("-----------------------------------");
-		
 	}
 	
 	public static Film lesFilm(Scanner leser) {
-		
 		System.out.println("Skriv Filmnummer:");
 		int filmnummer = Integer.parseInt(leser.nextLine());
 		while(filmnummer < 0) {
