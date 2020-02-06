@@ -21,19 +21,15 @@ public class Filmarkiv2 implements FilmarkivADT {
 	public Film[] hentFilmTabell() {
 		
 		Film[] filmer = new Film[this.antall];
-		LinearNode<Film> node = start;
+		LinearNode<Film> node = this.start;
 		int indeks = 0;
 		
-		while(node.getElement() != null) {
+		while(indeks < this.antall && node.getElement() != null) {
 			filmer[indeks] = node.getElement();
 			indeks++;
-			if(indeks == this.antall) {
-				break;
-			}
+			node = node.getNeste();
 		}
 		forkortFilmTabell(filmer);
-		
-		System.out.println("REEEE: " + filmer.length);
 		return filmer;
 	}
 	
@@ -61,21 +57,19 @@ public class Filmarkiv2 implements FilmarkivADT {
 	
 	@Override
 	public void leggTilFilm(Film film) {
-		
 		LinearNode<Film> node = new LinearNode<Film>(film);
-		
 		node.setNeste(this.start);
-		
 		this.start = node;
-		
 		this.antall++;
 	}
 	
 	@Override
 	public boolean slettFilm(int filmnummer) {
-		
-		if(this.start.getElement().getFilmnummer() == filmnummer) {
-			this.start = this.start.getNeste();	
+		if(this.antall < 1) {
+			return false;
+		} else if(this.start.getElement().getFilmnummer() == filmnummer) {
+			this.start = this.start.getNeste();
+			this.antall--;
 			return true;
 		} else{
 			LinearNode<Film> node = this.start.getNeste();
@@ -84,8 +78,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 			while(node.getElement() != null) {
 				if(node.getElement().getFilmnummer() == filmnummer) {
 					forrige.setNeste(node.getNeste());
-					node.setElement(null);
-					node = null;
+					this.antall--;
 					return true;
 				} else{
 					node = node.getNeste();
@@ -133,15 +126,16 @@ public class Filmarkiv2 implements FilmarkivADT {
 	}
 	
 	@Override
-	public int antallSjanger(Sjanger sjanger) {
+public int antallSjanger(Sjanger sjanger) {
 		
 		int antallSjanger = 0;
-		LinearNode<Film> node = start;
+		LinearNode<Film> node = this.start;
 		
 		while(node.getElement() != null) {
 			if(node.getElement().getSjanger() == sjanger) {
 				antallSjanger++;
 			}
+			node = node.getNeste();
 		}
 		return antallSjanger;
 	}

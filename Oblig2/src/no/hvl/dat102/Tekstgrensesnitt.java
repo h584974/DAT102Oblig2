@@ -29,20 +29,36 @@ public class Tekstgrensesnitt {
 	
 	public static Film lesFilm(Scanner leser) {
 		System.out.println("Skriv Filmnummer:");
-		int filmnummer = Integer.parseInt(leser.nextLine());
-		while(filmnummer < 0) {
-			System.out.println("Filmnummer kan ikke være negativ");
-			filmnummer = Integer.parseInt(leser.nextLine());
+		int filmnummer = 0;
+		while(true) {
+			try {
+				filmnummer = Integer.parseInt(leser.nextLine());
+			} catch(NumberFormatException e) {
+				System.out.println("Ugyldig filmnummer angitt, prøv igjen:");
+			}
+			if(filmnummer < 1) {
+				System.out.println("Filmnummer må være positiv, prøv igjen:");
+			} else {
+				break;
+			}	
 		}
 		
 		System.out.println("Skriv Tittel:");
 		String tittel = leser.nextLine();
 		
+		int utgivelseaar = 0;
 		System.out.println("Skriv utgivelseår");
-		int utgivelseaar = Integer.parseInt(leser.nextLine());
-		while(utgivelseaar < 0) {
-			System.out.println("Utgivelseår kan ikke være negativ");
-			utgivelseaar = Integer.parseInt(leser.nextLine());
+		while(true) {
+			try {
+				utgivelseaar = Integer.parseInt(leser.nextLine());
+			} catch(NumberFormatException e) {
+				System.out.println("Ugyldig utgivelseår angitt, prøv igjen:");
+			}
+			if(utgivelseaar < 1) {
+				System.out.println("Utgivelseår må være positiv, prøv igjen:");
+			} else {
+				break;
+			}	
 		}
 		
 		System.out.println("Skriv sjanger (SCIFI, DOKUMENTAR, FANTASI):");
@@ -65,7 +81,6 @@ public class Tekstgrensesnitt {
 	}
 	
 	public static void skrivUtFilmTabell(Film[] filmer) {
-		
 		System.out.println("----------------------------------------");
 		for(Film i : filmer) {
 			visFilm(i);
@@ -74,7 +89,6 @@ public class Tekstgrensesnitt {
 	}
 	
 	public static void visFilm(Film film) {
-		
 		try {
 			String output = String.format("%15s", "Filmnummer") + String.format("%25d",film.getFilmnummer()) + "\n";
 			output += String.format("%15s", "Tittel:") + String.format("%25s", film.getTittel()) + "\n";
@@ -82,7 +96,6 @@ public class Tekstgrensesnitt {
 			output += String.format("%15s", "År utgitt:") + String.format("%25d", film.getUtgivelseaar()) + "\n";
 			output += String.format("%15s", "Filmselskap:") + String.format("%25s", film.getFilmselskap()) + "\n";
 			output += String.format("%15s", "Produsent:") + String.format("%25s", film.getProdusent());
-		
 			System.out.println(output);
 		} catch(NullPointerException e) {
 			System.out.println("NullPointerException, verdi for Film ikke funnet i Tekstgrensesnitt.visFilm");

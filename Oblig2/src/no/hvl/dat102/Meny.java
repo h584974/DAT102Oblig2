@@ -13,11 +13,9 @@ public class Meny {
 	}
 	
 	public void start()  {
-		
 		Scanner leser = new Scanner(System.in);
 		int svar = 1;
 		System.out.println("Hva ønsker du å gjøre? Skriv følgende for ønskede funksjoner:\n");
-		
 		
 		while(true) {
 			System.out.println("Avslutt: 1");
@@ -59,7 +57,11 @@ public class Meny {
 				Tekstgrensesnitt.skrivUtFilmTabell(filmarkiv.sokTittel(leser.nextLine()));
 				System.out.println();
 			} else if(svar == 7) {
-				Tekstgrensesnitt.skrivUtFilmTabell(filmarkiv.hentFilmTabell());
+				if(filmarkiv.getAntall() == 0) {
+					System.out.println("Filmarkivet er tomt");
+				} else {
+					Tekstgrensesnitt.skrivUtFilmTabell(filmarkiv.hentFilmTabell());
+				}
 			} else {
 				System.out.println("Ingen gyldig svar angitt\n");
 			}
