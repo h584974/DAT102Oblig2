@@ -21,7 +21,7 @@ public class Fil {
 		try {
 			filleser = new FileReader(filnavn);
 		} catch(FileNotFoundException e) {
-			System.out.println("Fil ikke funnet");
+			System.out.println("Fil ikke funnet\nProgram avsluttet");
 			System.exit(1);
 		}
 		
@@ -48,7 +48,7 @@ public class Fil {
 			}
 			leser.close();
 		} catch(IOException e) {
-			System.out.println("IOException leser");
+			System.out.println("IOException: leser\nProgram avsluttet");
 			System.exit(2);
 		}
 		return filmarkiv;
@@ -78,7 +78,7 @@ public class Fil {
 			skriver.close();
 			
 		} catch(IOException e) {
-			System.out.println("IOException skriver");
+			System.out.println("IOException: skriver\nProgram avsluttet");
 			System.exit(3);
 		}
 		
