@@ -52,7 +52,7 @@ public class Tekstgrensesnitt {
 			try {
 				utgivelseaar = Integer.parseInt(leser.nextLine());
 			} catch(NumberFormatException e) {
-				System.out.println("Ugyldig utgivelseår angitt, prøv igjen:");
+				System.out.println("Ugyldig utgivelseår angitt");
 			}
 			if(utgivelseaar < 1) {
 				System.out.println("Utgivelseår må være positiv, prøv igjen:");

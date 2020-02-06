@@ -19,7 +19,6 @@ public class Filmarkiv2 implements FilmarkivADT {
 	
 	@Override
 	public Film[] hentFilmTabell() {
-		
 		Film[] filmer = new Film[this.antall];
 		LinearNode<Film> node = this.start;
 		int indeks = 0;
