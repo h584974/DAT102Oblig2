@@ -14,83 +14,6 @@ public class Fil {
 	private final static String SKILLE = "#";
 	
 	public static Filmarkiv2 lesFraFil(String filnavn) {
-		FileReader filleser = null;
-		try {
-			filleser = new FileReader(filnavn);
-		} catch(FileNotFoundException e) {
-			System.out.println("Fil ikke funnet");
-			System.exit(1);
-		}
-		Filmarkiv2 filmarkiv = new Filmarkiv2();
-		try {
-			BufferedReader leser = new BufferedReader(filleser);
-			leser.readLine();
-		
-			while(true) {
-				String tempstring = leser.readLine();
-			
-				if(tempstring == null || tempstring.equals("")) {
-					break;
-				}
-			
-				int filmnummeri = tempstring.indexOf(SKILLE);
-				int filmnummer = Integer.parseInt(tempstring.substring(0, filmnummeri));
-			
-				int titteli = tempstring.indexOf(SKILLE, filmnummeri);
-				String tittel = tempstring.substring(filmnummeri + 1, titteli);
-			
-				int utgivelseaari = tempstring.indexOf(SKILLE, titteli);
-				int utgivelseaar = Integer.parseInt(tempstring.substring(titteli + 1, utgivelseaari));
-			
-				int sjangeri = tempstring.indexOf(SKILLE, utgivelseaari);
-				Sjanger sjanger = Sjanger.finnSjanger(tempstring.substring(utgivelseaari + 1, sjangeri));
-			
-				int filmselskapi = tempstring.indexOf(SKILLE, sjangeri);
-				String filmselskap = tempstring.substring(sjangeri + 1, filmselskapi);
-			
-				String produsent = tempstring.substring(filmselskapi + 1);	
-			
-				filmarkiv.leggTilFilm(new Film(filmnummer, produsent, tittel, utgivelseaar, sjanger, filmselskap));
-			}
-			leser.close();
-		} catch(IOException e) {
-			System.out.println("IOException leser");
-			System.exit(2);
-		}
-		return filmarkiv;
-	}
-	
-	public static void skrivTilFIl(FilmarkivADT filmarkiv, String filnavn) {
-		
-		try {
-			FileWriter filskriver = new FileWriter(filnavn);
-			
-			BufferedWriter skriver = new BufferedWriter(filskriver);
-			
-			Film[] filmtabell = filmarkiv.hentFilmTabell();
-			skriver.write(filmarkiv.getAntall() + "\n");
-			
-			for(int i = 0; i < filmtabell.length; i++) {
-				String filmstreng = "";
-				filmstreng += filmtabell[i].getFilmnummer() + SKILLE;
-				filmstreng += filmtabell[i].getTittel() + SKILLE;
-				filmstreng += filmtabell[i].getUtgivelseaar() + SKILLE;
-				filmstreng += filmtabell[i].getSjanger() + SKILLE;
-				filmstreng += filmtabell[i].getFilmselskap() + SKILLE;
-				filmstreng += filmtabell[i].getProdusent() + "\n";
-				skriver.write(filmstreng);
-			}
-			
-			skriver.close();
-			
-		} catch(IOException e) {
-			System.out.println("IOException skriver");
-			System.exit(3);
-		}
-		
-	}
-	
-	public static Filmarkiv2 lesFraFil2(String filnavn) {
 		
 		FileReader filleser = null;
 		Filmarkiv2 filmarkiv = new Filmarkiv2();
@@ -129,6 +52,36 @@ public class Fil {
 			System.exit(2);
 		}
 		return filmarkiv;
+	}
+	
+	public static void skrivTilFIl(FilmarkivADT filmarkiv, String filnavn) {
+		
+		try {
+			FileWriter filskriver = new FileWriter(filnavn);
+			
+			BufferedWriter skriver = new BufferedWriter(filskriver);
+			
+			Film[] filmtabell = filmarkiv.hentFilmTabell();
+			skriver.write(filmarkiv.getAntall() + "\n");
+			
+			for(int i = 0; i < filmtabell.length; i++) {
+				String filmstreng = "";
+				filmstreng += filmtabell[i].getFilmnummer() + SKILLE;
+				filmstreng += filmtabell[i].getTittel() + SKILLE;
+				filmstreng += filmtabell[i].getUtgivelseaar() + SKILLE;
+				filmstreng += filmtabell[i].getSjanger() + SKILLE;
+				filmstreng += filmtabell[i].getFilmselskap() + SKILLE;
+				filmstreng += filmtabell[i].getProdusent() + "\n";
+				skriver.write(filmstreng);
+			}
+			
+			skriver.close();
+			
+		} catch(IOException e) {
+			System.out.println("IOException skriver");
+			System.exit(3);
+		}
+		
 	}
 	
 }
