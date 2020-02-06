@@ -62,6 +62,18 @@ public class Meny {
 				} else {
 					Tekstgrensesnitt.skrivUtFilmTabell(filmarkiv.hentFilmTabell());
 				}
+			} else if(svar == 8) {
+				if(filmarkiv.getAntall() < 1) {
+					System.out.println("Filmarkivet er tomt, ingenting å lagre til fil");
+				} else {
+					System.out.println("Skriv filnavn du øsnker å lagre til");
+					String filnavn = leser.nextLine();
+					Fil.skrivTilFIl(filmarkiv, filnavn);
+				}
+			} else if(svar == 9) {
+				System.out.println("Skriv filnavn du øsnker å lese fra");
+				String filnavn = leser.nextLine();
+				filmarkiv = Fil.lesFraFil(filnavn);
 			} else {
 				System.out.println("Ingen gyldig svar angitt\n");
 			}

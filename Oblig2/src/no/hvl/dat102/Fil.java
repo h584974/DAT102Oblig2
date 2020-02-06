@@ -13,17 +13,15 @@ public class Fil {
 
 	private final static String SKILLE = "#";
 	
-	public static void lesFraFil(FilmarkivADT filmarkiv, String filnavn) {
-		
+	public static Filmarkiv2 lesFraFil(String filnavn) {
 		FileReader filleser = null;
-		
 		try {
 			filleser = new FileReader(filnavn);
 		} catch(FileNotFoundException e) {
 			System.out.println("Fil ikke funnet");
 			System.exit(1);
 		}
-		
+		Filmarkiv2 filmarkiv = new Filmarkiv2();
 		try {
 			BufferedReader leser = new BufferedReader(filleser);
 			leser.readLine();
@@ -54,12 +52,12 @@ public class Fil {
 			
 				filmarkiv.leggTilFilm(new Film(filmnummer, produsent, tittel, utgivelseaar, sjanger, filmselskap));
 			}
-		
 			leser.close();
 		} catch(IOException e) {
 			System.out.println("IOException leser");
 			System.exit(2);
 		}
+		return filmarkiv;
 	}
 	
 	public static void skrivTilFIl(FilmarkivADT filmarkiv, String filnavn) {
