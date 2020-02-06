@@ -13,6 +13,5 @@ public class FilmarkivKlient {
 		meny.start();
 		
 		System.out.println("Program avsluttet");
-		
 	}
 }

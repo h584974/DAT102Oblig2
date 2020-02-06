@@ -25,6 +25,8 @@ public class Meny {
 			System.out.println("Skriv ut filmer ut i fra produsent: 5");
 			System.out.println("Skriv ut film ut i fra tittel: 6");
 			System.out.println("Skriv ut alle filmer i akriv: 7");
+			System.out.println("Lagre filmarkiv til fil ved gitt navn: 8");
+			System.out.println("Hent filmarkiv fra fil ved gitt navn: 9");
 			
 			try {
 				svar = Integer.parseInt(leser.nextLine());
