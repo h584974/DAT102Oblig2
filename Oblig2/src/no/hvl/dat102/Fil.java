@@ -90,4 +90,45 @@ public class Fil {
 		
 	}
 	
+	public static Filmarkiv2 lesFraFil2(String filnavn) {
+		
+		FileReader filleser = null;
+		Filmarkiv2 filmarkiv = new Filmarkiv2();
+		
+		try {
+			filleser = new FileReader(filnavn);
+		} catch(FileNotFoundException e) {
+			System.out.println("Fil ikke funnet");
+			System.exit(1);
+		}
+		
+		try {
+			BufferedReader leser = new BufferedReader(filleser);
+			leser.readLine();
+			
+			while(true) {
+				String tempstring = leser.readLine();
+			
+				if(tempstring == null || tempstring.equals("")) {
+					break;
+				}
+			
+				String[] stringliste = tempstring.split(SKILLE);
+				
+				int filmnummer = Integer.parseInt(stringliste[0]);
+				String tittel = stringliste[1];
+				int utgivelseaar = Integer.parseInt(stringliste[2]);
+				Sjanger sjanger = Sjanger.finnSjanger(stringliste[3]);
+				String filmselskap = stringliste[4];
+				String produsent = stringliste[5];
+				filmarkiv.leggTilFilm(new Film(filmnummer, produsent, tittel, utgivelseaar, sjanger, filmselskap));
+			}
+			leser.close();
+		} catch(IOException e) {
+			System.out.println("IOException leser");
+			System.exit(2);
+		}
+		return filmarkiv;
+	}
+	
 }
