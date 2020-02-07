@@ -9,7 +9,6 @@ public class FilmarkivKlient {
 		Scanner leser = new Scanner(System.in);
 		System.out.println("Skriv filnavn på arkiv du ønsker å åpne, eller skriv '1' for å opprette nytt arkiv");
 		String svar = leser.nextLine();
-		leser.close();
 		FilmarkivADT filmarkiv;
 		if(svar.equals("1")) {
 			filmarkiv = new Filmarkiv2();
@@ -18,7 +17,7 @@ public class FilmarkivKlient {
 		}
 		Meny meny = new Meny(filmarkiv);
 		meny.start();
-		
+		leser.close();
 		System.out.println("Program avsluttet");
 	}
 }
